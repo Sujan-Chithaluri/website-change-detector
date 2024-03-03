@@ -1,0 +1,157 @@
+<html>
+	<head>
+	
+		{% block abovestyle %}{% endblock %}
+		
+		<style>
+			body 
+			{
+				background-image:linear-gradient(45deg, #49D49D 20%, #A2C7E5 80%);
+			}
+			
+			.headings{
+				width:95%;
+				margin: 0 auto;
+				margin-top:2%;
+				position:relative;
+				box-shadow:0 12px 15px 0 rgba(0,0,0,.24);
+				background:rgba(40,57,101,.2);	
+				padding:10px 10px;
+				display: flex; 
+				justify-content: space-between;
+			}
+			
+			.username{
+				color:white;
+				text-transform:uppercase;
+				text-decoration: none;
+				padding:10px 10px;
+				position:relative;
+				font:400 16px/18px 'Open Sans',sans-serif;
+			}
+			
+			.tags{
+				display: flex;
+			}
+			
+			.hd{
+				position:relative;
+				color:white;
+				text-decoration: none;
+				padding:10px 10px;
+				text-transform:uppercase;
+				font:400 16px/18px 'Open Sans',sans-serif;
+			}
+			
+			.hd:hover{
+				background:rgba(40,57,101,.5);
+				color:black;
+			}
+			
+			.tt{
+				font:400 30px/30px 'Open Sans',sans-serif;
+				margin:0 auto;
+				color:#fff;
+				padding:30px 30px;
+			}
+			
+			.content{
+				max-width:500px;
+				margin: 0 auto;
+				display: flex; 
+				flex-wrap: wrap;
+				text-align: center;
+				justify-content: space-between;
+				padding:20px 20px;
+				box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+				border-radius: 20px;
+				background:rgba(40,57,101,.2);	
+				
+			}
+			
+			.rowss{
+				flex:90%;
+				padding:20px 20px;
+				
+			}
+			
+			.num
+			{
+				font:400 30px/30px 'Open Sans',sans-serif;
+				width: 40px;
+				height: 40px;
+				margin:0 auto;
+				background:rgba(40,57,101,.2);
+				border-radius:50%;
+				padding:5px 5px;
+				box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			}
+			
+			.tt1{
+				margin:0 auto;
+				max-width:80%;
+				font:400 25px/25px 'Open Sans',sans-serif;
+				color:#000;
+				padding:5px 5px;
+			}
+			
+			
+			{% block style %}{% endblock %}
+		</style>
+		
+		{% block afterstyle %}{% endblock %}
+	
+</head>
+<body>
+
+	<div class="headings">
+	
+		<div class="username">
+			Hello {{ session['user_name'] }}
+		</div >	
+		
+		<div class="tags">
+			<a class="hd" href='/home'>HOME</a>
+			<a class="hd" href='/viewtasks'>VIEW TASKS</a>
+			<!-- <a class="hd" href='/viewlog'>VIEW LOG</a> -->
+			
+			{% if session['isadmin'] %}
+			<a class="hd" href='/manageusers'>MANAGE USERS</a>
+			{% endif %}
+			
+			<a class="hd" href='/settings'>CHANGE PASSWORD</a>
+			<a class="hd" href='/logout'> LOGOUT</a>
+		</div>
+	</div>
+
+{% block body %}
+
+<center>
+	<div class="tt"> Welcome to <br/>Website Monitoring</div>
+</center>
+
+<div class="content">
+
+	<div class="rowss">
+		<div class="num">1</div>
+		<div class="tt1">Select the portion of the page you want to track</div>
+	</div>
+
+	<div class="rowss">
+		<div class="num">2</div>
+		<div class="tt1">We monitor the page in the background for changes</div>
+	</div>
+
+	<div class="rowss">
+		<div class="num">3</div>
+		<div class="tt1">Get alerts via email when something changes</div>
+	</div>
+	
+</div>
+
+{% endblock %}
+
+
+
+</body>
+</html>

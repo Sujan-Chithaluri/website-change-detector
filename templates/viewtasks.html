@@ -1,0 +1,237 @@
+{% extends 'layout.html' %}
+
+{% block abovestyle %}{% endblock %}
+{% block style %}
+
+	
+	.uplabel{
+		text-transform:uppercase;
+		font:600 16px/16px 'Open Sans',sans-serif;
+		width:70%;
+		color:#000;
+		display:block;
+		border-radius:2px;
+		position:relative;
+		display:inline-block;
+		margin-top:30px;
+		padding:5px 20px;
+		align-text:center;
+	}
+	
+	.norlabel{
+		text-transform:uppercase;
+		font:600 13px/13px 'Open Sans',sans-serif;
+		color:#000;
+		position:relative;
+		display:inline-block;
+	}
+	
+	.conout{
+		width:70%;
+		margin: 0 auto;
+		margin-top:10px;
+		border-radius:30px;	
+	}
+	
+	.eachcard{
+		width:90%;
+		margin: 30 auto;
+		position:relative;
+		box-shadow:0 12px 15px 0 rgba(0,0,0,.24);
+		border-radius:20px;
+		background:rgba(40,57,101,.4);	
+		padding:10px 10px;
+		display: flex; 
+		justify-content: space-between;	
+		flex-direction: column;
+	}
+	
+	.details{
+		display: flex;
+		flex-direction: row;
+		padding:5px 10px;
+		justify-content: space-between;	
+	}
+	
+	.tasktitle{
+		font:600 16px/16px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+		position:relative;
+		
+	}
+	
+	.taskurl{
+		font:600 13px/13px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+		position:relative;
+		align-self: stretch;
+	}
+	
+	.taskDate{
+		font:400 13px/13px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;		
+	}
+	
+	
+	.link{
+		color:white;
+		text-decoration: none;
+		padding:10px 10px;
+	}
+	
+	.parameters{
+		justify-content: normal;
+	}
+	
+	.funcs{
+		margin: 0 auto;
+		position:relative;
+		padding:10px 10px;
+	}
+	
+	.del{
+		position:relative;
+		color:white;
+		text-decoration: none;
+		padding:8px 8px;
+		text-transform:uppercase;
+		font:400 15px/15px 'Open Sans',sans-serif;
+		background:#DC143C;
+		border-radius:20px;
+	}
+	
+	.upd{
+		position:relative;
+		color:white;
+		text-decoration: none;
+		padding:8px 8px;
+		text-transform:uppercase;
+		font:400 15px/15px 'Open Sans',sans-serif;
+		background:#32CD32;
+		border-radius:20px;
+	}
+	
+	.del:hover{
+		background:rgba(40,57,101,.5);
+		color:black;
+		border-radius:20px;
+	}
+	
+	.upd:hover{
+		background:rgba(40,57,101,.5);
+		color:black;
+		border-radius:20px;
+	}
+	
+	
+	
+	.parameters{
+		display:flex;
+		justify-content: space-between;	
+		flex-direction: row;
+		padding:10px 10px;
+	}
+	
+	.taskFreq {
+		font:400 14px/14px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+	}
+	
+	.tasksens {
+		font:400 14px/14px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+	}
+	
+	.taskKP{
+		font:400 14px/14px 'Open Sans',sans-serif;
+		color:white;
+		padding:5px 20px;
+		align-self: stretch;
+	}
+	
+{% endblock %}
+{% block afterstyle %}{% endblock %}
+
+{% block body %}
+
+<div>
+
+	<center>	
+		<label class="uplabel">Total number of tasks created : {{ tasks| length }}</label>
+	</center>
+<!-- 	
+	<table id="contents" class="contents">
+		<tr>
+			
+			<th>URL</th>
+			<th>Title</th>
+			<th>Frequency</th>
+			<th>Senstivity</th>
+			<th>Keyword</th>
+			<th>Created On</th>
+			<th><th>
+		</tr>
+		
+		{% for task in tasks %}
+		
+		<tr>
+			<td> {{ task[1][:50] }} </td>
+			<td> {{ task[2] }} </td>
+			<td> {{ task[3] }} </td>
+			<td> {{ task[4] }} </td>
+			<td> {{ task[5] }} </td>
+			<td> {{ task[12] }} </td>
+			<td>
+				<a href="/delete/{{task[0]}}">Delete</a>
+				<a href="/update/{{task[0]}}">Update</a>
+			</td>
+		</tr>
+		
+		{% endfor %}
+	
+	</table>
+	 -->
+	
+	<div class="conout" >
+	
+		{% for task in tasks %}
+		
+			<div class="eachcard">
+				
+				<div class="details">
+					<div class="tasktitle"> {{ task[2].title() }}	</div>
+					<div class="taskDate">Created On : {{ task[12] }} </div>
+				</div>
+					
+				<div class="taskurl">	<a class="link" href={{task[1]}} target="_blank">{{ task[1][:50] }}</a>	</div>
+				
+				
+				<div class="parameters">
+					<div class="taskFreq"> <label class="norlabel">Frequency :</label>	{{ task[3] }} 		</div>
+					<div class="tasksens"> <label class="norlabel">Sensitivity :</label>	{{ task[4] }}		</div>
+				</div>
+				
+				{% if task[5]|length > 0 %}
+				<div class="taskKP"> <label class="norlabel">Keywords and Phrases :</label>	{{ task[5] }}		</div>
+				{% endif %}
+				
+				<div class="funcs">
+					<a class="del" href="/delete/{{task[0]}}">Delete</a>
+					<a class="upd" href="/update/{{task[0]}}">Update</a>
+				</div>
+				
+				
+			</div>
+			
+		{% endfor %}
+		
+	</div>
+
+</div>
+
+{% endblock %}

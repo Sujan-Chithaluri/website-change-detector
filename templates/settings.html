@@ -1,0 +1,292 @@
+{% extends 'layout.html' %}
+
+{% block abovestyle %}
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+{% endblock %}
+{% block style %}
+
+		
+	.allcon{
+		width:600px;
+		height:400px;
+		border-radius:20px;
+		margin:0 auto;
+		margin-top:40px;
+		padding:10px 10px;
+		background:rgba(40,57,101,.2);
+		box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+		border-radius: 20px;
+		text-align:center;
+	}
+	
+	label{
+		text-transform:uppercase;
+		font:600 16px/16px 'Open Sans',sans-serif;
+		width:70%;
+		color:#000;
+		display:block;
+		border-radius:2px;
+		position:relative;
+		display:inline-block;
+		padding:10px 10px;
+	}
+	
+	.ttext{
+		margin:0 auto;
+		width:70%;
+		font:400 16px/18px 'Open Sans',sans-serif;
+		padding:10px;
+		border-radius:20px;
+		border:none;
+		outline: 0;
+		display:block;
+		background:rgba(255,255,255,.9);
+	}
+	
+	select{
+		font:400 16px/18px 'Open Sans',sans-serif;
+		outline: 0;
+		padding:10px 10px;
+		border-radius:20px;
+		width:70%;
+		background:rgba(255,255,255,.9);
+	}
+	
+
+	.group{
+		padding:10px 10px;
+	}
+	
+	.bttn{
+		max-width:300px;
+		margin-top:10px;
+		margin-bottom:10px;
+		width:30%;
+		font:400 16px/18px 'Open Sans',sans-serif;
+		padding:10px;
+		border-radius:20px;
+		border:none;
+		outline: 0;
+		text-align:center;
+		background:rgba(40,57,101,.7);
+		color:#fff;
+		text-transform:uppercase;
+	}
+	
+	.red{
+		background:red;
+	}
+	
+	.bttn:hover{
+		background:rgba(40,57,101,.5);
+		color:black;
+	}
+	
+	.down{
+		margin:0 auto;
+		width:600px;
+		padding-top:5px;
+		text-align:center;
+	}	
+	
+	.x{
+		display:none;
+		margin:0 auto;
+		text-align:center;
+		width:70%;
+		background:rgba(40,57,101,.5);
+		padding: 5px 3px;
+		border-radius: 25px;
+		font:600 12px/10px 'Open Sans',sans-serif;
+	}
+
+
+	.y{
+		display:none;
+		margin:0 auto;
+		text-align:center;
+		width:70%;
+		background:rgba(40,57,101,.5);
+		padding: 5px 10px;
+		border-radius: 25px;
+		font:600 12px/10px 'Open Sans',sans-serif;
+	}
+	
+	.flash{
+		display:block;
+		color:red;
+		margin:0 auto;
+		margin-top:30px;
+		height:40px;
+		align-content:center;
+		font:600 12px/5px 'Open Sans',sans-serif;
+	}
+
+	
+	.alert.info {
+		padding: 10px 10px;
+		margin:0 auto;
+		margin-top:30px;
+		max-width:525px;
+		height:10px;
+		background-color: green;
+		text-align:center;
+		font:600 12px/10px 'Open Sans',sans-serif;
+		color:white;
+	}
+
+	.alert.danger {
+		padding: 10px 10px;
+		margin:0 auto;
+		margin-top:30px;
+		max-width:525px;
+		height:10px;
+		background-color: red;
+		text-align:center;
+		font:600 12px/10px 'Open Sans',sans-serif;
+		color:white;
+	}
+
+{% endblock %}
+{% block afterstyle %}
+
+<script>
+
+	function checkPassword1()
+	{ 
+		var p1=document.getElementById("pass1");
+		var p2=document.getElementById("pass2");
+		var mx=document.getElementById("x");
+		var my=document.getElementById("y");
+		
+		var goodColor = "#66cc66";
+		var badColor = "#ff6666";
+		
+		if(p1.value.length >= 8)
+		{
+			mx.style.color = goodColor;
+			mx.style.display="block";
+			mx.innerHTML="Password length satisfied!";
+		}
+		else
+		{
+			mx.style.color = badColor;
+			mx.style.display="block";
+			mx.innerHTML="Password should be minimum of 8chars!";
+			return;
+		}
+			
+	}
+	function checkPassword2()
+	{ 
+		var p1=document.getElementById("pass1");
+		var p2=document.getElementById("pass2");
+		var mx=document.getElementById("x");
+		var my=document.getElementById("y");
+		
+		var goodColor = "#66cc66";
+		var badColor = "#ff6666";
+		
+		if(p1.value == p2.value)
+		{
+			my.style.color = goodColor;
+			my.style.display="block";
+			my.innerHTML="Passwords Matched!";
+		}	
+		else
+		{
+			my.style.color = badColor;
+			my.style.display="block";
+			my.innerHTML="Passwords are not same!";
+			return;
+		}
+				
+	}
+	
+	function validatePass()
+	{
+		var p1=document.getElementById("pass1");
+		var p2=document.getElementById("pass2");
+		
+		if(p1.value != p2.value)
+		{
+			alert("Passwords havent matched");
+			returnToPreviousPage();
+			return false
+		}
+		
+		else if( document.getElementById("changepassform").checkValidity() )
+		{
+			//alert("Sign-up Succesful!");
+			document.forms['changepassform'].submit();
+			return true
+		}
+		
+	}
+
+	$(document).ready(function() 
+	{
+		//$('#flashMessage').delay(3000).fadeOut();
+		setTimeout(function(){document.getElementById("flashMessage").style.visibility = "hidden";},4000);	
+	});
+
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+
+		<div  id="flashMessage" class="flash">
+			{% with messages = get_flashed_messages(with_categories=true) %}  
+			 {% if messages %}  
+				   {% for category, message in messages %}  
+						<div class="alert {{ category }}" role="alert"> {{ message }}</div>  
+				   {% endfor %}  
+			 {% endif %}  
+			{% endwith %}  
+		</div>
+
+
+	<div class="allcon">
+		
+		<form id="changepassform" action="{{url_for('changepass')}}" method="post" onsubmit="event.preventDefault(); validatePass();">
+		
+			<div class="group">
+				
+				<label>Old Password</label>
+				<input type="password" class="ttext" id="opass" name="opass"   maxlength="100" spellcheck="false" required />
+				
+			</div>
+			
+			<div class="group">
+			
+				<label>New Password</label>
+				<input type="password" class="ttext"  id="pass1" name="pass1"  minlength="8" onkeyup="checkPassword1(); return false;" spellcheck="false" required />
+				<div class="x" id="x"></div>
+				
+			</div>
+			
+			<div class="group">
+				
+				<label>Re-enter New Password</label>
+				<input type="password" class="ttext" id="pass2" name="pass2" minlength="8" onkeyup="checkPassword2(); return false;" spellcheck="false" required />
+				<div class="y" id="y"></div>
+				
+			</div>
+					
+		<input type="submit" class="bttn" value="UPDATE" />
+		
+		</form>
+	</div>
+	
+	<div class="down">
+		<form action="{{url_for('profile')}}">
+			<input type="submit" class="bttn red" value="CANCEL" />
+		</form>
+	</div>
+
+
+{% endblock %}

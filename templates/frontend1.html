@@ -1,0 +1,300 @@
+{% extends 'layout.html' %}
+
+{% block abovestyle %}
+	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+{% endblock %}
+    
+
+{% block style %}					
+		
+		.t1
+		{
+			width:50%;
+			padding:10px;
+			font-size:20px;
+			border-radius:10px;
+			border:none;
+			outline: 0;
+		}
+		
+		input[type=button],input[type=submit]
+		{
+			color:black;
+			font-size: 15px;
+			padding: 10px 15px;
+			border: none;
+			cursor: pointer;
+			border-radius: 10px;
+			text-align: center;
+		}
+		
+		input[type=button]:hover,input[type=submit]:hover
+		{
+			background-color:black;
+			color: white;
+		}
+		
+		#outside
+		{
+			margin-top:5%;
+			padding:3px 3px 3px 3px;
+			width: 1103px;
+			position:relative;
+			overflow:hidden;
+			border-radius: 3px;
+			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+		}
+		
+		#ss
+		{
+			overflow:hidden;
+		}
+		
+		#divResize 
+		{ 
+			position:absolute;
+			border:dashed 2px rgba(0,0,0,0.89);
+			left:600px;
+			top:300px;
+            width:300px; 
+            height:250px; 
+			box-shadow:0 0 0 900000px rgba(0,0,0,0.75);
+        } 
+		
+		.down
+		{
+			width:1103px;
+			margin:0 auto;
+			margin-top:30px;
+			padding:20px 20px;
+			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			border-radius: 20px;
+			text-align:center;
+			background:rgba(40,57,101,.2);
+		}
+		
+		.allcon{
+			width:600px;
+			border-radius:20px;
+			margin:0 auto;
+			margin-top:40px;
+			padding:10px 10px;
+			background:rgba(40,57,101,.4);
+			box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+			border-radius: 20px;
+			text-align:center;
+		}
+		
+		label{
+			text-transform:uppercase;
+			font:600 16px/16px 'Open Sans',sans-serif;
+			width:70%;
+			color:#000;
+			display:block;
+			border-radius:2px;
+			position:relative;
+			display:inline-block;
+			padding:10px 10px;
+		}
+		
+		.ttext{
+			margin:0 auto;
+			width:70%;
+			font:400 16px/18px 'Open Sans',sans-serif;
+			padding:10px;
+			border-radius:20px;
+			border:none;
+			outline: 0;
+			display:block;
+			background:rgba(255,255,255,.9);
+		}
+		
+		select{
+			font:400 16px/18px 'Open Sans',sans-serif;
+			outline: 0;
+			padding:10px 10px;
+			border-radius:20px;
+			width:70%;
+			background:rgba(255,255,255,.9);
+		}
+		
+
+		.group{
+			padding:10px 10px;
+		}
+		
+		.bttn{
+			max-width:300px;
+			margin-top:10px;
+			margin-bottom:10px;
+			width:30%;
+			font:400 16px/18px 'Open Sans',sans-serif;
+			padding:10px;
+			border-radius:20px;
+			border:none;
+			outline: 0;
+			text-align:center;
+			background:rgba(40,57,101,.7);
+			color:#fff;
+			text-transform:uppercase;
+		}
+		
+		.red{
+			background:red;
+		}
+		
+		.bttn:hover{
+			background:rgba(40,57,101,.5);
+			color:black;
+		}
+		
+		.dummy{
+			margin:0 auto;
+			width:70%;
+			border-radius:20px;
+			color:white;
+			background:rgba(40,57,101,.5);
+			padding: 5px 3px;
+			font:600 12px/10px 'Open Sans',sans-serif;
+			display:none;
+		}
+		
+		.outerdummy{
+			height:10px;
+		}
+		
+{% endblock %}
+
+{% block afterstyle %}	
+	<script>
+
+		function xyz()
+		{
+			document.getElementById("t1").value="";
+		}
+		
+		$(document).ready(function() 
+		{
+			$(function() { $("#divResize").draggable({containment: ".ss" }).resizable(); });
+		});
+		
+		function myFunction() 
+		{
+			var testDiv = document.getElementById("ss");
+			var demoDiv = document.getElementById("divResize");
+			var x=document.getElementById("demo");
+			
+			var t=demoDiv.offsetTop-testDiv.offsetTop;
+			var l=demoDiv.offsetLeft-testDiv.offsetLeft;
+			var w=demoDiv.offsetWidth;
+			var h=demoDiv.offsetHeight;
+			
+			document.getElementById("d1").value=t;
+			document.getElementById("d2").value=l;
+			document.getElementById("d3").value=w;
+			document.getElementById("d4").value=h;	
+		}
+		
+		function saytouser(){
+			var my=document.getElementById("dummy");
+			my.style.display="block";
+		}
+		
+		function remove(){
+			var my=document.getElementById("dummy");
+			my.style.display="none";
+		}		
+				
+	</script>
+	
+{% endblock %}
+	
+</head>
+
+{% block body %}
+
+	<center><br /><br /><br /><br /><br />
+
+	<form action="{{url_for('sendurl')}}" method="post">
+		<input type="text" id="t1" class="t1" name="url" placeholder="Enter Website:https://www.cbit.ac.in/...." /><br /><br />
+		<input type="Button" id="b2" value="CLEAR" onclick="xyz()"/>
+		<input type="Submit" id="b1" value="FETCH THE PAGE" />
+	</form>
+
+	
+	<div id="outside">
+	
+		<img src="{{ screenshot }}" id="ss" class="ss" align="middle"/>
+		<div id="divResize"> </div>
+		
+    </div>
+	
+	<form action="{{url_for('sendparam')}}" method="post">
+	
+	<div class="allcon">
+				
+				<div class="group">
+					
+					<label>Alert name</label>
+					<input type="text" class="ttext" id="tasktitle" name="tasktitle"  placeholder="CBIT AEC-COE Page" maxlength="100" spellcheck="false" autocomplete="off" required />
+					
+				</div>
+				
+				<div class="group">
+				
+					<label>Keywords and Phrases</label>
+					<input type="text" class="ttext"  id="taskkp" name="taskkp" autocomplete="off" placeholder="Alert me only if these keywords appears" onfocus="saytouser()" onblur="remove()" maxlength="200" spellcheck="false" title="If many separate each using comma" />
+					<div class="outerdummy"> <div class="dummy" id="dummy">Use comma for seperation  (ex. keyword1,Phrase1,keyword2)</div></div>
+				</div>
+				
+				<div class="group">
+				
+					<label>Check every</label>
+					<select id="taskfreq" name="taskfreq" required >
+						<option value="" selected disabled hidden>Choose Frequency</option>					
+						<option value = "15 mins">15 mins</option>  
+						<option value = "30 mins">30 mins</option>  
+						<option value = "1 hour">1 hour</option>  
+						<option value = "3 hours">3 hours</option>
+						<option value = "6 hours">6 hours</option>
+						<option value = "1 day">1 day</option>
+						<option value = "1 week">1 week</option>
+					</select> 
+					
+				</div>
+				
+				<div class="group">
+				
+					<label>Alert when change is</label>
+					<select id="tasksens" name="tasksens" required>  
+						<option value="" selected disabled hidden>Choose sensitivity</option>
+						<option value = "HIGH">HIGH</option>  
+						<option value = "MEDIUM">MEDIUM</option>  
+						<option value = "LOW">LOW</option>  
+						<option value = "TINY">TINY</option>  
+					</select> 
+					
+				</div>
+			
+			
+				
+		</div>
+			
+		
+		<input type="hidden" id="d1" name="t" />
+		<input type="hidden" id="d2" name="l" />
+		<input type="hidden" id="d3" name="w" />
+		<input type="hidden" id="d4" name="h" />
+		
+		<input type="submit" class="bttn" value="START MONITORING" onclick="myFunction()"/>
+			
+	</form>
+     
+	</div>
+	</form>
+
+	</center>
+	
+{% endblock %}

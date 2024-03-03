@@ -1,0 +1,192 @@
+{% extends 'layout.html' %}
+
+{% block abovestyle %}
+	
+{% endblock %}
+    
+
+{% block style %}					
+		
+	.allcon{
+		width:600px;
+		border-radius:20px;
+		margin:0 auto;
+		margin-top:40px;
+		padding:10px 10px;
+		background:rgba(40,57,101,.2);
+		box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+		border-radius: 20px;
+		text-align:center;
+	}
+	
+	label{
+		text-transform:uppercase;
+		font:600 16px/16px 'Open Sans',sans-serif;
+		width:70%;
+		color:#000;
+		display:block;
+		border-radius:2px;
+		position:relative;
+		display:inline-block;
+		padding:10px 10px;
+	}
+	
+	.ttext{
+		margin:0 auto;
+		width:70%;
+		font:400 16px/18px 'Open Sans',sans-serif;
+		padding:10px;
+		border-radius:20px;
+		border:none;
+		outline: 0;
+		display:block;
+		background:rgba(255,255,255,.9);
+	}
+	
+	select{
+		font:400 16px/18px 'Open Sans',sans-serif;
+		outline: 0;
+		padding:10px 10px;
+		border-radius:20px;
+		width:70%;
+		background:rgba(255,255,255,.9);
+	}
+	
+
+	.group{
+		padding:10px 10px;
+	}
+	
+	.bttn{
+		max-width:300px;
+		margin-top:10px;
+		margin-bottom:10px;
+		width:30%;
+		font:400 16px/18px 'Open Sans',sans-serif;
+		padding:10px;
+		border-radius:20px;
+		border:none;
+		outline: 0;
+		text-align:center;
+		background:rgba(40,57,101,.7);
+		color:#fff;
+		text-transform:uppercase;
+	}
+	
+	.red{
+		background:red;
+	}
+	
+	.bttn:hover{
+		background:rgba(40,57,101,.5);
+		color:black;
+	}
+	
+	.down{
+		margin:0 auto;
+		width:600px;
+		padding-top:5px;
+		text-align:center;
+	}
+	
+	.dummy{
+		margin:0 auto;
+		width:70%;
+		border-radius:20px;
+		color:white;
+		background:rgba(40,57,101,.5);
+		padding: 5px 3px;
+		font:600 12px/10px 'Open Sans',sans-serif;
+		display:none;
+	}
+	
+	.outerdummy{
+		height:10px;
+	}
+
+	
+		
+{% endblock %}
+
+{% block afterstyle %}	
+	<script>
+		
+		function saytouser(){
+			var my=document.getElementById("dummy");
+			my.style.display="block";
+		}
+		
+		function remove(){
+			var my=document.getElementById("dummy");
+			my.style.display="none";
+		}
+		
+	</script>
+	
+{% endblock %}
+	
+</head>
+
+{% block body %}
+
+
+		<div class="allcon">
+			
+			<form action="/update/{{task[0][0]}}" method="post">
+			
+				<div class="group">
+					
+					<label>Alert name</label>
+					<input type="text" class="ttext" id="tasktitle" autocomplete="off" name="tasktitle" value="{{task[0][2]}}" placeholder="CBIT AEC-COE Page" maxlength="100" spellcheck="false" required />
+					
+				</div>
+				
+				<div class="group">
+				
+					<label>Keywords and Phrases</label>
+					<input type="text" class="ttext"  id="taskkp" autocomplete="off" name="taskkp" value="{{task[0][5]}}" placeholder="Alert me only if these keywords appears" onfocus="saytouser()" onblur="remove()" maxlength="200" spellcheck="false" title="If many separate each using comma" />
+					<div class="outerdummy"> <div class="dummy" id="dummy">Use comma for seperation  (ex. keyword1,Phrase1,keyword2)</div></div>
+					
+				</div>
+				
+				<div class="group">
+				
+					<label>Check every</label>
+					<select id="taskfreq" name="taskfreq" value="{{task[0][3]}}" required >  
+						<option value="" selected disabled hidden>Choose Frequency</option>
+						<option value = "15 mins">15 mins</option>  
+						<option value = "30 mins">30 mins</option>  
+						<option value = "1 hour">1 hour</option>  
+						<option value = "3 hours">3 hours</option>
+						<option value = "6 hours">6 hours</option>
+						<option value = "1 day">1 day</option>
+						<option value = "1 week">1 week</option>
+					</select> 
+					
+				</div>
+				
+				<div class="group">
+				
+					<label>Alert when change is</label>
+					<select id="tasksens" name="tasksens" value="{{task[0][4]}}" required >  
+						<option value="" selected disabled hidden>Choose sensitivity</option>
+						<option value = "HIGH">HIGH</option>  
+						<option value = "MEDIUM">MEDIUM</option>  
+						<option value = "LOW">LOW</option>  
+						<option value = "TINY">TINY</option>   
+					</select> 
+					
+				</div>
+			
+			<input type="submit" class="bttn" value="UPDATE" />
+			
+			</form>
+		</div>
+		
+		<div class="down">
+			<form action="{{url_for('viewtasks')}}">
+				<input type="submit" class="bttn red" value="CANCEL" />
+			</form>
+		</div>
+	
+{% endblock %}

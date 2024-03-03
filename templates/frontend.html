@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block style %}			
+			input[type=text]
+			{
+				width:50%;
+				padding:10px;
+				font-size:20px;
+				border-radius:10px;
+				border:none;
+				outline: 0;
+			}
+			
+			input[type=button],input[type=submit]
+			{
+				color:black;
+				font-size: 15px;
+				padding: 10px 15px;
+				border: none;
+				cursor: pointer;
+				border-radius: 10px;
+				text-align: center;
+			}
+			
+			input[type=button]:hover,input[type=submit]:hover
+			{
+				background-color:black;
+				color: white;
+			}
+			
+			p#mssg
+			{
+				color:white;
+				display:block;
+				font-size:20px;
+			}
+			
+			div#loading
+			{
+				height:300px;
+				display:none;
+				background:url(/static/sampleGIFs/loadingimage11.gif) no-repeat;
+				background-position:center;
+			}
+			
+			.alert {
+			  padding: 20px;
+			  background-color: #f44336;
+			  color: white;
+			  font:600 12px/5px 'Open Sans',sans-serif;
+			  max-width:525px;
+			}	
+			
+			.closebtn {
+			  margin-left: 15px;
+			  color: white;
+			  font-weight: bold;
+			  float: right;
+			  font-size: 22px;
+			  line-height: 20px;
+			  cursor: pointer;
+			  transition: 0.3s;
+			}
+
+			.closebtn:hover {
+			  color: black;
+			}
+			
+{% endblock %}
+
+{% block afterstyle %}		
+	<script>
+		function xyz()
+		{
+			document.getElementById("t1").value="";	
+		}
+		function loading()
+		{
+			document.getElementById("mssg").innerHTML="RETRIEVING THE PAGE <br/> PLEASE WAIT ...";
+			document.getElementById("loading").style.display="block";
+		}
+
+	</script>
+{% endblock %}
+	
+</head>
+
+{% block body %}
+
+<center><br /><br /><br /><br /><br />
+
+<form action="{{url_for('sendurl')}}" method="post">
+
+	<input type="text" id="t1" name="url" placeholder="Enter Website : https://www.cbit.ac.in/...." /><br /><br />
+	<input type="Button" id="b2" value="CLEAR" onclick="xyz()"/>
+	<input type="submit" id="b1" value="FETCH THE PAGE" onclick="loading()"/>
+	
+	<br /><br />
+	<br /><br />
+	
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+					{{message}}
+					<br/><br/><br/>Please check and try again
+				</div>
+			{% endfor %}
+		{% endif %}
+		
+	{% endwith %}	
+	
+	<p id="mssg" ></p>
+	
+	
+	<div id="loading"></div>
+</form>
+
+
+
+<br /><br />
+
+
+</center>
+{% endblock %}

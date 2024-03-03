@@ -1,0 +1,194 @@
+{% extends 'layout.html' %}
+
+{% block abovestyle %}{% endblock %}
+{% block style %}
+
+	
+	.uplabel{
+		text-transform:uppercase;
+		font:600 16px/16px 'Open Sans',sans-serif;
+		width:70%;
+		color:#000;
+		display:block;
+		border-radius:2px;
+		position:relative;
+		display:inline-block;
+		margin-top:30px;
+		padding:5px 20px;
+		align-text:center;
+	}
+	
+	.norlabel{
+		text-transform:uppercase;
+		font:600 13px/13px 'Open Sans',sans-serif;
+		color:#000;
+		position:relative;
+		display:inline-block;
+	}
+	
+	.conout{
+		width:70%;
+		margin: 0 auto;
+		margin-top:10px;
+		border-radius:30px;	
+	}
+	
+	.eachcard{
+		width:90%;
+		margin: 30 auto;
+		position:relative;
+		box-shadow:0 12px 15px 0 rgba(0,0,0,.24);
+		border-radius:20px;
+		background:rgba(40,57,101,.4);	
+		padding:10px 10px;
+		display: flex; 
+		justify-content: space-between;	
+		flex-direction: column;
+	}
+	
+	.details{
+		display: flex;
+		flex-direction: row;
+		padding:5px 10px;
+		justify-content: space-between;	
+	}
+	
+	.tasktitle{
+		font:400 16px/16px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+		position:relative;
+		
+	}
+	
+	.taskurl{
+		font:400 16px/16px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 20px;
+		position:relative;
+		align-self: stretch;
+	}
+	
+	.taskDate{
+		font:400 13px/13px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;		
+	}
+	
+	
+	.link{
+		color:white;
+		text-decoration: none;
+		padding:10px 10px;
+	}
+	
+	.parameters{
+		justify-content: normal;
+	}
+	
+	.funcs{
+		margin: 0 auto;
+		position:relative;
+		padding:10px 10px;
+	}
+	
+	.del{
+		position:relative;
+		color:white;
+		text-decoration: none;
+		padding:8px 8px;
+		text-transform:uppercase;
+		font:400 15px/15px 'Open Sans',sans-serif;
+		background:#DC143C;
+		border-radius:20px;
+	}
+	
+	.upd{
+		position:relative;
+		color:white;
+		text-decoration: none;
+		padding:8px 8px;
+		text-transform:uppercase;
+		font:400 15px/15px 'Open Sans',sans-serif;
+		background:#32CD32;
+		border-radius:20px;
+	}
+	
+	.del:hover{
+		background:rgba(40,57,101,.5);
+		color:black;
+		border-radius:20px;
+	}
+	
+	.upd:hover{
+		background:rgba(40,57,101,.5);
+		color:black;
+		border-radius:20px;
+	}
+	
+	
+	
+	.parameters{
+		display:flex;
+		justify-content: space-between;	
+		flex-direction: row;
+		padding:10px 10px;
+	}
+	
+	.taskFreq {
+		font:400 14px/14px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+	}
+	
+	.tasksens {
+		font:400 14px/14px 'Open Sans',sans-serif;
+		color:white;
+		padding:10px 10px;
+	}
+	
+	.taskKP{
+		font:400 14px/14px 'Open Sans',sans-serif;
+		color:white;
+		padding:5px 20px;
+		align-self: stretch;
+	}
+	
+{% endblock %}
+{% block afterstyle %}{% endblock %}
+
+{% block body %}
+
+<div>
+
+	<center>	
+		<label class="uplabel">Total number of users : {{ users| length }}</label>
+	</center>
+	
+	<div class="conout" >
+	
+		{% for user in users %}
+		
+			<div class="eachcard">
+				
+				<div class="details">
+					<div class="tasktitle"><label class="norlabel">User Name :</label> {{ user[1] }} </div>
+					<div class="taskDate"><label class="norlabel">Registered On :</label> {{ user[5] }} </div>
+				</div>
+					
+				<div class="taskurl"><label class="norlabel">Email ID :</label>	{{ user[3] }}</a>	</div>
+				
+				<div class="funcs">
+					<a class="del" href="/deleteuser/{{user[0]}}">Delete</a>
+				</div>
+					
+			</div>
+			
+		{% endfor %}
+		
+	</div>
+
+</div>
+
+{% endblock %}
+

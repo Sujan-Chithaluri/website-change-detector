@@ -1,0 +1,156 @@
+<html>
+	<head>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+		<style>
+			body 
+			{
+				background-image:linear-gradient(45deg, #49D49D 20%, #A2C7E5 80%);
+			}
+			
+			label{
+				text-transform:uppercase;
+				font:600 16px/18px 'Open Sans',sans-serif;
+				width:100%;
+				color:#000;
+				display:block;
+				border-radius:2px;
+				position:relative;
+				display:inline-block;
+				padding:20px 20px;
+			}
+
+			.t1{
+				max-width:300px;
+				margin:0 auto;
+				width:70%;
+				font:400 16px/18px 'Open Sans',sans-serif;
+				padding:10px;
+				border-radius:20px;
+				border:none;
+				outline: 0;
+				text-align:center;
+				display:block;	
+				margin-top:20px;
+				margin-bottom:20px;
+			}
+			
+			.button{
+				max-width:300px;
+				margin-top:20px;
+				margin-bottom:20px;
+				text-decoration: none;
+				width:40%;
+				font:400 16px/18px 'Open Sans',sans-serif;
+				padding:10px;
+				border-radius:20px;
+				border:none;
+				outline: 0;
+				text-align:center;
+				background:rgba(40,57,101,.7);
+				color:#fff;
+				text-transform:uppercase;
+			}
+			
+			.button:hover{
+				background:rgba(40,57,101,.5);
+				color:black;
+			}
+			
+			.otp{
+				min-width:500px;
+				margin:0 auto;
+				margin-top:2%;
+				padding:3% 3%;
+				width:30%;
+				background:rgba(40,57,101,.2);
+				position:relative;
+				box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+				border-radius: 20px;
+				text-align:center;
+			}
+			
+			.flash{
+				display:block;
+				color:red;
+				margin-top:30px;
+				height:40px;
+				align-content:center;
+				font:600 12px/5px 'Open Sans',sans-serif;
+			}
+
+			
+			.alert.info {
+				padding: 10px 10px;
+				margin-top:30px;
+				max-width:525px;
+				height:10px;
+				background-color: green;
+				font:600 12px/10px 'Open Sans',sans-serif;
+				color:white;
+			}
+
+			.alert.danger {
+				padding: 10px 10px;
+				margin-top:30px;
+				max-width:525px;
+				height:10px;
+				background-color: red;
+				font:600 12px/10px 'Open Sans',sans-serif;
+				color:white;
+			}	
+
+			.down{
+				padding:30px 30px;
+			}
+			
+		</style>
+		
+		<script>
+		
+			$(document).ready(function() 
+			{
+				setTimeout(function(){document.getElementById("flashMessage").style.visibility = "hidden";},4000);	
+			});
+			
+		
+		</script>
+</head>
+<body>
+
+<center>
+
+<br/><br/>
+
+		
+	<div  id="flashMessage" class="flash">
+		{% with messages = get_flashed_messages(with_categories=true) %}  
+		 {% if messages %}  
+			   {% for category, message in messages %}  
+					<div class="alert {{ category }}" role="alert"> {{ message }}</div>  
+			   {% endfor %}  
+		 {% endif %}  
+		{% endwith %}  
+	</div>
+		
+	<div class="div2">
+	
+		<form id="otp" class="otp" action="{{url_for('verify')}}" method="post">
+			<label>Check your email for the confirmation code</label>
+			<input type= "text" id="t1" class="t1" name="otp" placeholder="CONFIRMATION CODE" />
+			<input type="submit" class="button" name="s1" value="REQUEST NEW CODE" />
+			<input type="submit" class="button" name="s2" value="SUBMIT CODE" >
+		</form>
+		
+		
+		<form action="{{url_for('signup')}}" class="down">
+			<input type="submit" class="button" value="BACK" />
+		</form>
+	
+	</div>
+
+</center>	
+
+</body>
+</html>
